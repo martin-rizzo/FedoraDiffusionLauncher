@@ -8,43 +8,49 @@
 </p>
 <!--
 
-# Fedora Diffussion Webui -->
+# Fedora Diffusion Webui
 
-This is a project that enables using an application on Linux that only works with Python v3.10 or lower on a version of Fedora Linux that comes with Python v3.11 and downgrading is not possible.
+This Bash script primarily addresses the compatibility issue between PyTorch
+and Python v3.11 that arises during the installation of 'webui.sh'. The
+incompatibility issue is indicated on the screen with the following error
+message:
 
-## Installation
+    ERROR: Could not find a version that satisfies the requirement torchvision==0.14.1+cu117 (from versions: 0.1.6, 0.1.7, 0.1.8, 0.1.9, 0.2.0, 0.2.1, 0.2.2, 0.2.2.post2, 0.2.2.post3) ERROR: No matching distribution found for torchvision==0.14.1+cu117 
 
-To use this application, you need to create a Python virtual environment using v3.10 with the following command:
+Additionally, the script includes some basic checks and tips during the
+installation process to avoid common issues.
 
-    python3.10 -m venv virt_env_dir
+## What is the compatibility issue about?
 
-Then, run the following bash script:
+This issue arises because the version of PyTorch being used does not support
+Python versions higher than v3.10. Fedora 37 includes a newer version that is
+incompatible, and there is no easy way to downgrade it.
 
-    ./setup.sh
+This script generates a virtual environment using Python3.10, downloads
+'webui.sh' from AUTOMATIC1111's official repository, and executes it within
+the virtual environment.
 
-This script takes care of automatically creating the virtual environment and calling the application that needs v3.10.
+The script attempts to automate this process as much as possible. However,
+if any human intervention is necessary, it displays easily understandable
+messages.
 
 ## Usage
 
-Once the virtual environment is installed and configured, you can use the application as follows:
+Use this script for both the initial installation and each subsequent attempt
+to launch Stable Diffusion Web UI, at least until PyTorch becomes compatible
+with the current version included in Fedora.
 
-    python3.10 app.py
+To initiate the installation and execution from scratch:
 
-## Contributing
+    ./fedora-webui.sh
 
-If you would like to contribute to this project, please follow these steps:
+To launch 'Stable Diffusion Web UI' egain once it is already installed:
 
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Make the necessary changes in your branch.
-4. Submit a pull request to the main branch of the project.
+    ./fedora-webui.sh
 
-## Credits
-
-This project was developed by [your name here] and is distributed under the [your license here] license.
 
 ## Lincense
 
-Copyright (c) 2022 Martin Rizzo  
+Copyright (c) 2023 Martin Rizzo  
 This project is licensed under the MIT license.  
 See the ["LICENSE"](LICENSE) file for details.
