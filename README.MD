@@ -6,10 +6,11 @@
 <img alt="License"  src="https://img.shields.io/github/license/martin-rizzo/FedoraDiffusionWebui?color=11D">
 <img alt="Last"     src="https://img.shields.io/github/last-commit/martin-rizzo/FedoraDiffusionWebui">
 </p>
-<!--
 
+<!---
 # Fedora Diffusion Webui
 -->
+
 This Bash script primarily addresses the compatibility issue between PyTorch
 and Python v3.11 that arises during the installation of 'webui.sh'. The
 incompatibility issue is indicated on the screen with the following error
@@ -26,8 +27,8 @@ This issue arises because the version of PyTorch being used does not support
 Python versions higher than v3.10. Fedora 37 includes a newer version that is
 incompatible, and there is no easy way to downgrade it.
 
-This script generates a virtual environment using Python3.10, downloads
-'webui.sh' from AUTOMATIC1111's official repository, and executes it within
+This script generates a virtual environment using "Python3.10", downloads
+"webui.sh" from AUTOMATIC1111's official repository, and executes it within
 the virtual environment.
 
 The script attempts to automate this process as much as possible. However,
@@ -37,8 +38,8 @@ messages.
 ## Usage
 
 Use this script for both the initial installation and each subsequent attempt
-to launch Stable Diffusion Web UI, at least until PyTorch becomes compatible
-with the current version included in Fedora.
+to launch Stable Diffusion Web UI (at least until PyTorch becomes compatible
+with the version of Python included in Fedora).
 
 To initiate the installation and execution from scratch:
 
