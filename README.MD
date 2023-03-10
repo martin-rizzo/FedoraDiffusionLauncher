@@ -9,7 +9,7 @@
 <!--
 
 # Fedora Diffusion Webui
-
+-->
 This Bash script primarily addresses the compatibility issue between PyTorch
 and Python v3.11 that arises during the installation of 'webui.sh'. The
 incompatibility issue is indicated on the screen with the following error
