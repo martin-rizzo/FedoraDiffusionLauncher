@@ -1,5 +1,5 @@
 <h1 align="center">Fedora Diffussion Webui</h1>
-<p align="center">Script to solve Fedora incompatibilities with AUTOMATIC1111's Stable Diffusion Web UI</p>
+<p align="center">Script to resolve compatibility issues between Fedora and AUTOMATIC1111's Stable Diffusion Web UI.</p>
 <p align="center">
 <img alt="Platform" src="https://img.shields.io/badge/platform-fedora linux-33F">
 <img alt="Language" src="https://img.shields.io/badge/language-bash-22E">
