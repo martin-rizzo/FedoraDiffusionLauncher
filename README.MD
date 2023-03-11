@@ -1,4 +1,4 @@
-<h1 align="center">Fedora Diffussion Webui</h1>
+<h1 align="center">Fedora Diffusion Webui</h1>
 <p align="center">Script to resolve compatibility issues between Fedora and AUTOMATIC1111's Stable Diffusion Web UI.</p>
 <p align="center">
 <img alt="Platform" src="https://img.shields.io/badge/platform-fedora linux-33F">
@@ -35,6 +35,14 @@ The script attempts to automate this process as much as possible. However,
 if any human intervention is necessary, it displays easily understandable
 messages.
 
+## Development status
+
+The script is currently in an experimental phase, and while there is a functional version available, there are still adjustments and improvements being made to optimize its performance.
+
+It is recommended that this version not be used in production or critical environments, but only for evaluation and testing purposes, as there may be limitations and errors that need to be resolved.
+
+Thank you for your understanding and support.
+
 ## Usage
 
 Use this script for both the initial installation and each subsequent attempt
@@ -48,7 +56,6 @@ To initiate the installation and execution from scratch:
 To launch 'Stable Diffusion Web UI' egain once it is already installed:
 
     ./fedora-webui.sh
-
 
 ## Lincense
 
