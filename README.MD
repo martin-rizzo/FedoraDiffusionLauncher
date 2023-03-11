@@ -1,14 +1,14 @@
-<h1 align="center">Fedora Diffusion Webui</h1>
+<h1 align="center">Fedora Diffusion Launcher</h1>
 <p align="center">Script to resolve compatibility issues between Fedora and AUTOMATIC1111's Stable Diffusion Web UI.</p>
 <p align="center">
 <img alt="Platform" src="https://img.shields.io/badge/platform-fedora linux-33F">
 <img alt="Language" src="https://img.shields.io/badge/language-bash-22E">
-<img alt="License"  src="https://img.shields.io/github/license/martin-rizzo/FedoraDiffusionWebui?color=11D">
-<img alt="Last"     src="https://img.shields.io/github/last-commit/martin-rizzo/FedoraDiffusionWebui">
+<img alt="License"  src="https://img.shields.io/github/license/martin-rizzo/FedoraDiffusionLauncher?color=11D">
+<img alt="Last"     src="https://img.shields.io/github/last-commit/martin-rizzo/FedoraDiffusionLauncher">
 </p>
 
 <!---
-# Fedora Diffusion Webui
+# Fedora Diffusion Launcher
 -->
 
 This Bash script primarily addresses the compatibility issue between PyTorch
@@ -51,11 +51,11 @@ with the version of Python included in Fedora).
 
 To initiate the installation and execution from scratch:
 
-    ./fedora-webui.sh
+    ./sdlauncher.sh
 
 To launch 'Stable Diffusion Web UI' egain once it is already installed:
 
-    ./fedora-webui.sh
+    ./sdlauncher.sh
 
 ## Lincense
 
