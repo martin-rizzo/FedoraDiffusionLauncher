@@ -16,7 +16,9 @@ and Python v3.11 that arises during the installation of 'webui.sh'. The
 incompatibility issue is indicated on the screen with the following error
 message:
 
-    ERROR: Could not find a version that satisfies the requirement torchvision==0.14.1+cu117 (from versions: 0.1.6, 0.1.7, 0.1.8, 0.1.9, 0.2.0, 0.2.1, 0.2.2, 0.2.2.post2, 0.2.2.post3) ERROR: No matching distribution found for torchvision==0.14.1+cu117 
+      ERROR: Could not find a version that satisfies the requirement torchvision==0.14.1+cu117
+      (from versions: 0.1.6, 0.1.7, 0.1.8, 0.1.9, 0.2.0, 0.2.1, 0.2.2, 0.2.2.post2, 0.2.2.post3)**  
+      ERROR: No matching distribution found for torchvision==0.14.1+cu117**
 
 Additionally, the script includes some basic checks and tips during the
 installation process to avoid common issues.
