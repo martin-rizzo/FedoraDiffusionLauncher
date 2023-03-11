@@ -6,9 +6,10 @@
 
 # Compatible version of python (must be <= 3.10)
 COMP_PYTHON='python3.10'
-WEBUI_SH_URL='https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh'
-VIRT_ENV_DIR='venv-'${COMP_PYTHON,,}
-
+SDWEBUI_REPO_URL='https://github.com/AUTOMATIC1111/stable-diffusion-webui.git'
+SDWEBUI_REPO_TITLE="AUTOMATIC1111's stable-diffusion-webui"
+VIRT_ENV_NAME='venv-'${COMP_PYTHON,,}
+SDWEBUI_LOCAL_NAME='stable-diffusion-webui'
 
 # Function that allows printing messages with different formats.
 # Usage: echoex [check|error|wait] <message>
@@ -70,6 +71,25 @@ function ensure_download() {
     chmod a+x "$local_file"
 }
 
+# Function that checks if a Git repo has been cloned already, and if not, clones it.
+# Usage: ensure_cloned <repo_url> <repo_name> <local_dir>
+# Arguments:
+#   - repo_url : the URL of the Git repository to be cloned.
+#   - repo_name: the name of the Git repository to be cloned.
+#   - local_dir: the local directory where the repository should be cloned to.
+#
+function ensure_cloned() {
+    local repo_url=$1 repo_name=$2 local_dir=$3
+    if [[ ! -d "$local_dir" ]]; then
+        echoex wait "cloning remote repository"
+        git clone "$repo_url" "$local_dir"
+        echoex check "$repo_name repo cloned in:"
+        echoex  "     $local_dir"
+    else
+        echoex check "$repo_name repo already cloned"
+    fi
+}
+
 # Function that checks whether a virtual environment exists, and creates
 # a new one if it doesn't.
 # Usage: ensure_virt_env <venv_dir> <python>
@@ -92,12 +112,13 @@ function ensure_virt_env() {
 ensure_command wget
 ensure_command git
 ensure_command "$COMP_PYTHON"
-ensure_download webui.sh "$WEBUI_SH_URL"
-ensure_virt_env "$PWD/$VIRT_ENV_DIR" "$COMP_PYTHON"
+ensure_cloned  "$SDWEBUI_REPO_URL" "$SDWEBUI_REPO_TITLE" "$PWD/$SDWEBUI_LOCAL_NAME"
+ensure_virt_env "$PWD/$VIRT_ENV_NAME" "$COMP_PYTHON"
 
 echoex check "activating virtual environment with $COMP_PYTHON"
-source "$VIRT_ENV_DIR/bin/activate"
+source "$PWD/$VIRT_ENV_NAME/bin/activate"
 
 echoex wait 'launching webui.sh'
+cd "$PWD/$SDWEBUI_LOCAL_NAME"
 python_cmd=$(which python) ./webui.sh
 
