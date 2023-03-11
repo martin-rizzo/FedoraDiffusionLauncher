@@ -7,7 +7,7 @@
 # Compatible version of python (must be <= 3.10)
 COMP_PYTHON='python3.10'
 WEBUI_SH_URL='https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh'
-VIRT_ENV_DIR='.venv-'$COMP_PYTHON
+VIRT_ENV_DIR='venv-'${COMP_PYTHON,,}
 
 
 # Function that allows printing messages with different formats.
