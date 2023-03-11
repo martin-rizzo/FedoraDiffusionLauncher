@@ -59,9 +59,8 @@ replacing \<your-directory\> with a directory name of your choice:
     cd <your-directory>
     git clone https://github.com/martin-rizzo/FedoraDiffusionLauncher.git .
     ./sdlauncher.sh
-
-Note: The git clone command ends with a dot . which specifies that the
-repository should be cloned into the current directory.
+    
+    ### Note that the last parameter of the git clone command is a dot . ###
 
 Once Stable Diffusion Web UI is installed, to launch it again, navigate to the
 installation directory and run the script:
