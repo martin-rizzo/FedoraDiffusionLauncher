@@ -37,9 +37,12 @@ messages.
 
 ## Development status
 
-The script is currently in an experimental phase, and while there is a functional version available, there are still adjustments and improvements being made to optimize its performance.
+The script is currently in an experimental phase, and while there is a
+functional version available, I am still working on making adjustments
+and improvements.
 
-It is recommended that this version not be used in production or critical environments, but only for evaluation and testing purposes, as there may be limitations and errors that need to be resolved.
+Please note that using this version in production or critical environments is
+not recommended, as there may be limitations and errors that I need to resolve.
 
 Thank you for your understanding and support.
 
@@ -49,12 +52,18 @@ Use this script for both the initial installation and each subsequent attempt
 to launch Stable Diffusion Web UI (at least until PyTorch becomes compatible
 with the version of Python included in Fedora).
 
-To initiate the installation and execution from scratch:
+To perform the initial installation, run the following commands,
+replacing <your-directory> with a directory name of your choice:
 
+    mkdir <your-directory>
+    cd <your-directory>
+    git clone https://github.com/martin-rizzo/FedoraDiffusionLauncher.git .
     ./sdlauncher.sh
 
-To launch 'Stable Diffusion Web UI' egain once it is already installed:
+Once Stable Diffusion Web UI is installed, to launch it again, navigate to the
+installation directory and run the script:
 
+    cd <your-directory>
     ./sdlauncher.sh
 
 ## Lincense
