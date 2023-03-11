@@ -23,6 +23,27 @@ message:
 Additionally, the script includes some basic checks and tips during the
 installation process to avoid common issues.
 
+## Usage
+
+Use this script for both the initial installation and each subsequent attempt
+to launch Stable Diffusion Web UI (at least until PyTorch becomes compatible
+with the version of Python included in Fedora).
+
+To perform the initial installation, run the following commands,
+replacing \<your-directory\> with a directory name of your choice:
+
+    #### Note that the last parameter of the git clone command is a dot '.'
+    mkdir <your-directory>
+    cd <your-directory>
+    git clone https://github.com/martin-rizzo/FedoraDiffusionLauncher.git .
+    ./sdlauncher.sh
+
+Once Stable Diffusion Web UI is installed, to launch it again, navigate to the
+installation directory and run the script:
+
+    cd <your-directory>
+    ./sdlauncher.sh
+
 ## What is the compatibility issue about?
 
 This issue arises because the version of PyTorch being used does not support
@@ -40,35 +61,12 @@ messages.
 ## Development status
 
 The script is currently in an experimental phase, and while there is a
-functional version available, I am still working on making adjustments
-and improvements.
-
-Please note that using this version in production or critical environments is
-not recommended, as there may be limitations and errors that I need to resolve.
+functional version available, I am still working on making adjustments and
+improvements. Please note that using this version in production or critical
+environments is not recommended, as there may be limitations and errors
+that I need to resolve.
 
 Thank you for your understanding and support.
-
-## Usage
-
-Use this script for both the initial installation and each subsequent attempt
-to launch Stable Diffusion Web UI (at least until PyTorch becomes compatible
-with the version of Python included in Fedora).
-
-To perform the initial installation, run the following commands,
-replacing \<your-directory\> with a directory name of your choice:
-
-    mkdir <your-directory>
-    cd <your-directory>
-    git clone https://github.com/martin-rizzo/FedoraDiffusionLauncher.git .
-    ./sdlauncher.sh
-    
-    ### Note that the last parameter of the git clone command is a dot . ###
-
-Once Stable Diffusion Web UI is installed, to launch it again, navigate to the
-installation directory and run the script:
-
-    cd <your-directory>
-    ./sdlauncher.sh
 
 ## Lincense
 
