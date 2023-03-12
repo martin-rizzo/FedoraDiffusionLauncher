@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
-#  Bash script to download and run stable diffusion resolving compatibility
-#  issues between Fedora and AUTOMATIC1111's Stable Diffusion Web UI.
+#  Bash script to download and run stable diffusion while
+#  resolving compatibility issues between Fedora and
+#  AUTOMATIC1111's Stable Diffusion Web UI.
+#
 #  https://github.com/martin-rizzo/FedoraDiffusionLauncher
 #  by Martin Rizzo
 
-# Compatible version of python (must be <= 3.10)
-COMP_PYTHON='python3.10'
+
+# Compatible version of python to use (must be <= 3.10)
+COMPATIBLE_PYTHON='python3.10'
+
+# AUTOMATIC1111's repository
 SDWEBUI_REPO_URL='https://github.com/AUTOMATIC1111/stable-diffusion-webui.git'
 SDWEBUI_REPO_TITLE="AUTOMATIC1111's stable-diffusion-webui"
+
+# Stable Diffusion WebUI local configuration
 SDWEBUI_LOCAL_URL='http://127.0.0.1:7860'
 SDWEBUI_LOCAL_NAME='stable-diffusion-webui'
-VIRT_ENV_NAME='venv-'${COMP_PYTHON,,}
+VIRT_ENV_NAME='venv'
+
+#---------------------------------- HELPERS ---------------------------------#
 
 # Function that allows printing messages with different formats.
 # Usage: echoex [check|error|wait] <message>
@@ -23,10 +32,12 @@ VIRT_ENV_NAME='venv-'${COMP_PYTHON,,}
 function echoex() {
     if [[ $1 == check ]]; then
         echo -e "\033[32m \xE2\x9C\x94 $2\033[0m"
+    elif [[ $1 == warn ]]; then
+        echo -e "\033[33m ! $2\033[0m"
     elif [[ $1 == error ]]; then
         echo -e "\033[31m x $2\033[0m"
     elif [[ $1 == wait ]]; then
-        echo -e "\033[33m - $2...\033[0m"
+        echo -e "\033[33m . $2...\033[0m"
     else
         echo -e "$1"
     fi
@@ -82,6 +93,12 @@ function ensure_virt_env() {
         "$python" -m venv "$venv_dir"
         echoex check 'new virtual environment created:'
         echoex  "     $venv_dir"
+    elif [[ ! -e "$venv_dir/bin/$python" ]]; then
+        echoex warn "a different version of python was selected ($python)"
+        echoex wait "recreating virtual environment"
+        rm -Rf "$venv_dir"
+        "$python" -m venv "$venv_dir"
+        echoex check "virtual environment recreated for $python"
     else
         echoex check 'virtual environment already exists'
     fi
@@ -108,17 +125,23 @@ function open_url_when_available() {
     fi
 }
 
+#================================== START ==================================#
+
+echo
+echo 'Fedora Diffusion Launcher'
+echo '-------------------------'
 ensure_command wget
 ensure_command git
-ensure_command "$COMP_PYTHON"
+ensure_command "$COMPATIBLE_PYTHON"
 ensure_cloned  "$SDWEBUI_REPO_URL" "$SDWEBUI_REPO_TITLE" "$PWD/$SDWEBUI_LOCAL_NAME"
 
-ensure_virt_env "$PWD/$VIRT_ENV_NAME" "$COMP_PYTHON"
-echoex check "activating virtual environment with $COMP_PYTHON"
+ensure_virt_env "$PWD/$VIRT_ENV_NAME" "$COMPATIBLE_PYTHON"
+echoex check "activating virtual environment with $COMPATIBLE_PYTHON"
 source "$PWD/$VIRT_ENV_NAME/bin/activate"
 
-echoex wait 'launching webui.sh'
 open_url_when_available "$SDWEBUI_LOCAL_URL" &
+
+echoex wait 'launching webui.sh'
 cd "$PWD/$SDWEBUI_LOCAL_NAME"
 python_cmd=$(which python) ./webui.sh
 
