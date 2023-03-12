@@ -8,8 +8,9 @@
 COMP_PYTHON='python3.10'
 SDWEBUI_REPO_URL='https://github.com/AUTOMATIC1111/stable-diffusion-webui.git'
 SDWEBUI_REPO_TITLE="AUTOMATIC1111's stable-diffusion-webui"
-VIRT_ENV_NAME='venv-'${COMP_PYTHON,,}
+SDWEBUI_LOCAL_URL='http://127.0.0.1:7860'
 SDWEBUI_LOCAL_NAME='stable-diffusion-webui'
+VIRT_ENV_NAME='venv-'${COMP_PYTHON,,}
 
 # Function that allows printing messages with different formats.
 # Usage: echoex [check|error|wait] <message>
@@ -46,29 +47,6 @@ function ensure_command() {
     else
         echoex check "$1 is installed"
     fi
-}
-
-# Function that downloads a file from a remote URL and ensures that
-# it is available locally.
-# Usage: ensure_download <local_file> <remote_url>
-# Arguments:
-#   - local_file: the name and path of the file to be saved locally.
-#   - remote_url: the URL of the file to be downloaded.
-#
-function ensure_download() {
-    local local_file=$1 remote_url=$2
-    if [[ ! -e "$local_file" ]]; then
-        echoex wait 'downloading'
-        wget -q --show-progress "$remote_url"
-        if [[ ! -f "$local_file" ]]; then
-            echo error "can not download $local_file\n"
-            exit 1
-        fi
-        echoex check "$local_file downloaded"
-    else
-        echoex check "$local_file already downloaded"
-    fi
-    chmod a+x "$local_file"
 }
 
 # Function that checks if a Git repo has been cloned already, and if not, clones it.
@@ -109,16 +87,38 @@ function ensure_virt_env() {
     fi
 }
 
+# Function that delays the launch of a URL until the URL can be successfully
+# connected to.
+# Usage: open_url_when_available <url>
+# Arguments:
+#   - url: the URL to be launched.
+#
+function open_url_when_available() {
+    local url="$1" count=0
+    if ! command -v xdg-open &> /dev/null; then
+      return
+    fi
+    while [[ $count -le 15 ]] && ! wget --spider "$url" 2>&1 | grep -q 'connected'
+    do
+        count=$((count+1))
+        sleep 2
+    done
+    if [[ $count -le 10 ]]; then
+        xdg-open "$url"
+    fi
+}
+
 ensure_command wget
 ensure_command git
 ensure_command "$COMP_PYTHON"
 ensure_cloned  "$SDWEBUI_REPO_URL" "$SDWEBUI_REPO_TITLE" "$PWD/$SDWEBUI_LOCAL_NAME"
-ensure_virt_env "$PWD/$VIRT_ENV_NAME" "$COMP_PYTHON"
 
+ensure_virt_env "$PWD/$VIRT_ENV_NAME" "$COMP_PYTHON"
 echoex check "activating virtual environment with $COMP_PYTHON"
 source "$PWD/$VIRT_ENV_NAME/bin/activate"
 
 echoex wait 'launching webui.sh'
+open_url_when_available "$SDWEBUI_LOCAL_URL" &
 cd "$PWD/$SDWEBUI_LOCAL_NAME"
 python_cmd=$(which python) ./webui.sh
 
