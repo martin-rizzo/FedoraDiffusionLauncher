@@ -1,5 +1,5 @@
 <h1 align="center">Fedora Diffusion Launcher</h1>
-<p align="center">Script to resolve compatibility issues between Fedora and AUTOMATIC1111's Stable Diffusion Web UI.</p>
+<p align="center">Bash script to easily install and launch AUTOMATIC1111's Stable Diffusion WebUI.</p>
 <p align="center">
 <img alt="Platform" src="https://img.shields.io/badge/platform-fedora linux-33F">
 <img alt="Language" src="https://img.shields.io/badge/language-bash-22E">
@@ -12,8 +12,8 @@
 -->
 
 This Bash script primarily addresses the compatibility issue between PyTorch
-and Python v3.11 that arises during the installation of 'webui.sh'. The
-incompatibility issue is indicated on the screen with the following error
+and Python v3.11 that arises during the installation of 'webui.sh' on Fedora 37.
+The incompatibility issue is indicated on the screen with the following error
 message:
 
       ERROR: Could not find a version that satisfies the requirement torchvision==0.14.1+cu117
