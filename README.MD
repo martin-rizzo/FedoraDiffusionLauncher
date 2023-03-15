@@ -30,13 +30,21 @@ to launch Stable Diffusion Web UI (at least until PyTorch becomes compatible
 with the version of Python included in Fedora).
 
 To perform the initial installation, run the following commands,
-replacing \<your-directory\> with a directory name of your choice:
+replacing ```<your-directory>``` with a directory name of your choice:
 
     #### Note that the last parameter of the git clone command is a dot '.'
     mkdir <your-directory>
     cd <your-directory>
     git clone https://github.com/martin-rizzo/FedoraDiffusionLauncher.git .
     ./sdlauncher.sh
+
+The directory structure after installation should look like this:
+
+    <your-directory>
+        ├── stable-diffusion-webui/
+        ├── venv/
+        ├── README.MD
+        └── sdlauncher.sh
 
 Once Stable Diffusion Web UI is installed, to launch it again, navigate to the
 installation directory and run the script:
